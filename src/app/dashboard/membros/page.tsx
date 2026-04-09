@@ -29,10 +29,10 @@ const MembrosPage: FC = ({}): ReactElement => {
                     <IconUserPlus size={18} />
                     NOVO MEMBRO
                 </button>
-                <Suspense fallback={<TableSkeleton />}>
-                    <MembersTableDataWrapper />
-                </Suspense>
             </div>
+            <Suspense fallback={<TableSkeleton />}>
+                <MembersTableDataWrapper />
+            </Suspense>
         </section>
     );
 };
