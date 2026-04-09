@@ -1,7 +1,21 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
+
+const projectRoot = process.cwd();
 
 const nextConfig: NextConfig = {
-  /* config options here */
+    cacheComponents: true,
+
+    outputFileTracingRoot: projectRoot,
+
+    turbopack: {
+        root: projectRoot,
+    },
+
+    logging: {
+        fetches: {
+            fullUrl: true,
+        },
+    },
 };
 
 export default nextConfig;

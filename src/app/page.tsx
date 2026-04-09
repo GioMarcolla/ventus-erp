@@ -1,65 +1,132 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+import { useActionState } from 'react';
+import Image from 'next/image';
+import { FC, ReactElement } from 'react';
+import Logo from '@/components/Logo';
+import { login } from '@/lib/actions/auth.actions';
+import { ActionState } from '@/lib/types/auth.types'; // Your new strict type
+import { cn } from '@/lib/utils/tailwind.utils';
+
+const HomePage: FC = (): ReactElement => {
+    // [state, formAction, isPending]
+    // useActionState handles the loading state directly, so we don't need a separate sub-component
+    const [state, formAction, isPending] = useActionState<ActionState, FormData>(login, null);
+
+    return (
+        <div className="flex h-screen w-full flex-row overflow-hidden bg-white">
+            {/* Left Side: Branding Image */}
+            <aside className="relative hidden grow basis-1/2 shadow-xl shadow-gray-800/30 md:block">
+                <Image
+                    src="/images/chiesetta.jpg"
+                    alt="Chiesetta alpina, jaragua do sul, santa catarina"
+                    fill
+                    className="object-cover"
+                    loading="eager"
+                    priority
+                    sizes="50vw"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
+                    quality={75}
+                />
+            </aside>
+
+            {/* Right Side: Login Form */}
+            <main className="bg-verde relative flex grow basis-1/2 flex-col items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+                <div className="w-full max-w-md space-y-8 rounded-2xl border border-gray-200 bg-white p-10 shadow-lg shadow-gray-600">
+                    <div className="flex flex-col items-center">
+                        <Logo className="h-40 w-40" />
+                        <h2 className="text-verde text-3xl font-extrabold tracking-tight">Círculo Ítalo-Brasileiro</h2>
+                        <p className="mt-2 text-sm font-medium text-gray-500">Sistema de Gestão de Clubes | ERP</p>
+                    </div>
+
+                    {/* Sassy Error Alert - Strictly Typed */}
+                    {state?.error && (
+                        <div className="animate-in fade-in slide-in-from-top-2 rounded-xl border border-red-200 bg-red-50 p-4 duration-300">
+                            <p className="text-xs font-black tracking-widest text-red-500 uppercase">{state.error}</p>
+                            <p className="text-sm font-semibold text-red-700">{state.details}</p>
+                        </div>
+                    )}
+
+                    <form action={formAction} className="mt-8 space-y-6">
+                        <div className="space-y-4">
+                            <div>
+                                <label
+                                    htmlFor="email"
+                                    className="ml-4 block text-[10px] font-bold tracking-widest text-gray-500 uppercase"
+                                >
+                                    Email/Usuário
+                                </label>
+                                <input
+                                    id="email"
+                                    name="email"
+                                    required
+                                    autoComplete="email"
+                                    className="focus:border-verde focus:ring-verde mt-1 block w-full rounded-full border border-gray-300 px-5 py-3 shadow-sm transition-all focus:ring-1 focus:outline-none sm:text-sm"
+                                    placeholder="seu email ou usuario"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    htmlFor="password"
+                                    className="ml-4 block text-[10px] font-bold tracking-widest text-gray-500 uppercase"
+                                >
+                                    Senha
+                                </label>
+                                <input
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    required
+                                    autoComplete="current-password"
+                                    className="focus:border-verde focus:ring-verde mt-1 block w-full rounded-full border border-gray-300 px-5 py-3 shadow-sm transition-all focus:ring-1 focus:outline-none sm:text-sm"
+                                    placeholder="•••••••••••"
+                                />
+                            </div>
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={isPending}
+                            className={cn(
+                                'group relative flex w-full justify-center rounded-full px-4 py-3 text-sm font-black tracking-widest text-white uppercase transition-all focus:ring-2 focus:ring-offset-2 focus:outline-none',
+                                isPending
+                                    ? 'cursor-not-allowed bg-gray-400'
+                                    : 'bg-verde shadow-md hover:bg-[#007038] hover:shadow-lg active:scale-[0.98]',
+                            )}
+                        >
+                            {isPending ? (
+                                <span className="flex items-center gap-2">
+                                    <svg className="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                                        <circle
+                                            className="opacity-25"
+                                            cx="12"
+                                            cy="12"
+                                            r="10"
+                                            stroke="currentColor"
+                                            strokeWidth="4"
+                                        />
+                                        <path
+                                            className="opacity-75"
+                                            fill="currentColor"
+                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                        />
+                                    </svg>
+                                    Verificando...
+                                </span>
+                            ) : (
+                                'Entrare'
+                            )}
+                        </button>
+                    </form>
+                </div>
+
+                <div className="absolute bottom-4 text-[10px] font-bold tracking-[0.2em] text-white/60 uppercase">
+                    © 2026 Ventus™ ERP by ZM
+                </div>
+            </main>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
-}
+    );
+};
+
+export default HomePage;
