@@ -1,5 +1,11 @@
 @import 'tailwindcss';
 
+@keyframes reverse-spin {
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
 @theme inline {
     /* --- Italian Branding Colors --- */
     --color-verde: #008c45;
@@ -19,6 +25,9 @@
     --color-bg-dark: hsl(0, 0%, 96%);
     --color-bg-darker: hsl(0, 0%, 93%);
 
+    --color-selected: var(--color-rosso);
+    /* --color-selected: red; */
+
     /* --- Typography --- */
     --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui;
     --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular;
@@ -26,6 +35,8 @@
     /* --- Spacing & Radius (The "Clean" Look) --- */
     --radius-md: 0.5rem;
     --radius-lg: 1rem;
+
+    --animate-reverse-spin: reverse-spin 2s linear infinite;
 }
 
 :root {
@@ -42,3 +53,4 @@ body {
     color: var(--foreground);
     font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
+

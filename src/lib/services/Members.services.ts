@@ -1,8 +1,10 @@
 import { db } from '@/lib/db/client';
 import { members, NewMember } from '@/lib/db/drizzle/Member.schema';
 import { desc, isNull, and, eq } from 'drizzle-orm';
+import waitFor from '@/lib/utils/delay.utils';
 
 const getAllMembers = async () => {
+    await waitFor(2000);
     return await db.select().from(members).where(isNull(members.deletedAt)).orderBy(desc(members.createdAt));
 };
 
