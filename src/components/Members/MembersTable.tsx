@@ -41,6 +41,7 @@ const MemberTable: FC<MemberTableProps> = ({ initialData, dataErrorMsg, classNam
                                         className="text-ink-dark border-bg-darker focus:border-selected w-full rounded-full border bg-white py-2 pr-4 pl-9 text-sm transition-all outline-none"
                                         placeholder="Filtrar..."
                                         onChange={e => setFilters(f => ({ ...f, name: e.target.value }))}
+                                        disabled={!filtered.length}
                                     />
                                 </div>
                             </th>
@@ -52,6 +53,7 @@ const MemberTable: FC<MemberTableProps> = ({ initialData, dataErrorMsg, classNam
                                     className="text-ink-dark border-bg-darker focus:border-selected w-full rounded-full border bg-white px-4 py-2 text-sm transition-all outline-none"
                                     placeholder="000..."
                                     onChange={e => setFilters(f => ({ ...f, cpf: e.target.value }))}
+                                    disabled={!filtered.length}
                                 />
                             </th>
                             <th className="border-bg-darker w-40 border-b p-5">
@@ -61,6 +63,7 @@ const MemberTable: FC<MemberTableProps> = ({ initialData, dataErrorMsg, classNam
                                 <select
                                     className="text-ink-light border-bg-darker focus:border-selected w-full cursor-pointer appearance-none rounded-full border bg-white px-4 py-2 text-sm outline-none"
                                     onChange={e => setFilters(f => ({ ...f, isActive: e.target.value }))}
+                                    disabled={!filtered.length}
                                 >
                                     <option value="">TODOS</option>
                                     <option value="true">ATIVO</option>
