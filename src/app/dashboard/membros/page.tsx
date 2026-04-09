@@ -9,9 +9,13 @@ const TableSkeleton = () => (
     </div>
 );
 
-const MembrosPage: FC = async ({}): Promise<ReactElement> => {
+const MembersTableDataWrapper: FC = async (): Promise<ReactElement> => {
     const data = await getAllMembers();
 
+    return <MemberTable initialData={data} />;
+};
+
+const MembrosPage: FC = ({}): ReactElement => {
     return (
         <section className="animate-in fade-in mx-auto max-w-400 p-8 duration-500">
             {/* Page Header */}
@@ -25,11 +29,10 @@ const MembrosPage: FC = async ({}): Promise<ReactElement> => {
                     <IconUserPlus size={18} />
                     NOVO MEMBRO
                 </button>
+                <Suspense fallback={<TableSkeleton />}>
+                    <MembersTableDataWrapper />
+                </Suspense>
             </div>
-
-            <Suspense fallback={<TableSkeleton />}>
-                <MemberTable initialData={data} />
-            </Suspense>
         </section>
     );
 };
