@@ -485,8 +485,8 @@ const MemberDetailsForm: FC<MemberDetailsFormProps> = ({
                                         <input
                                             disabled={isSaving}
                                             id={`${id}-bairro`}
-                                            name="distric"
-                                            defaultValue={initialData?.distric ?? ''}
+                                            name="district"
+                                            defaultValue={initialData?.district ?? ''}
                                             required
                                             className="w-full grow border-none bg-transparent text-left ring-0 outline-none focus:ring-0"
                                         />

@@ -1,11 +1,10 @@
-import { varchar, text } from 'drizzle-orm/pg-core';
+import { varchar, text, pgTable } from 'drizzle-orm/pg-core';
 
 export const addressColumns = {
     street: varchar('street', { length: 255 }).notNull(),
     number: varchar('number', { length: 20 }).notNull(),
-    // For the nonnos living in the city center or gated communities
     apartment: varchar('apartment', { length: 50 }),
-    distric: varchar('bairro', { length: 100 }).notNull(),
+    district: varchar('bairro', { length: 100 }).notNull(), // Corrigido 'district'
     city: varchar('city', { length: 100 }).notNull(),
     state: varchar('state', { length: 100 }).notNull(),
     country: varchar('country', { length: 100 }).default('Brasil').notNull(),
@@ -13,6 +12,8 @@ export const addressColumns = {
     reference: text('reference'),
 };
 
-export type Address = {
-    [K in keyof typeof addressColumns]: (typeof addressColumns)[K]['_']['data'];
-};
+// Criamos uma tabela "fake" apenas para inferir o tipo
+const tempTable = pgTable('temp_address', addressColumns);
+
+// Agora inferimos o tipo da tabela completa
+export type Address = typeof tempTable.$inferSelect;

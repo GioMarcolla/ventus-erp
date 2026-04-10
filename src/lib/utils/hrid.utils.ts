@@ -1,23 +1,30 @@
 import { db } from '@/lib/db/client';
-import { sql } from 'drizzle-orm';
-import { PgTable } from 'drizzle-orm/pg-core';
+import { sql, InferInsertModel, InferSelectModel } from 'drizzle-orm';
+import { PgColumn, PgTable } from 'drizzle-orm/pg-core';
 
 /**
- * Generic creator using strict T and I patterns.
- * Solves the overlap error by using a targeted type assertion.
+ * Representa qualquer PgTable que possua obrigatoriamente a coluna 'hrid'.
+ * Usamos Record para evitar a re-declaração dos genéricos internos da PgColumn.
  */
-export async function createEntityWithHRID<TTable extends PgTable, TInsert extends TTable['$inferInsert']>(
+type TableWithHRID = PgTable & {
+    hrid: PgColumn;
+};
+
+export async function createEntityWithHRID<TTable extends TableWithHRID>(
     table: TTable,
-    data: Omit<TInsert, 'hrid'>,
+    data: Omit<InferInsertModel<TTable>, 'hrid'>,
     prefix: string,
     tableName: string,
-): Promise<TTable['$inferSelect']> {
-    // Construct the values object strictly.
-    // We use the unknown-to-TInsert bridge to satisfy the compiler's strict overlap rules.
+): Promise<InferSelectModel<TTable>> {
+    /**
+     * Construímos o objeto de valores.
+     * O TypeScript agora aceita a união porque TTable garante que 'hrid' existe.
+     * Usamos a asserção para o modelo de inserção específico da TTable.
+     */
     const values = {
         ...data,
         hrid: sql`generate_hrid(${prefix}, ${tableName})`,
-    } as unknown as TInsert;
+    } as InferInsertModel<TTable>;
 
     const [result] = await db.insert(table).values(values).returning();
 
@@ -25,5 +32,5 @@ export async function createEntityWithHRID<TTable extends PgTable, TInsert exten
         throw new Error(`Critical: Insert failed on table ${tableName}. No record returned.`);
     }
 
-    return result as TTable['$inferSelect'];
+    return result as InferSelectModel<TTable>;
 }
