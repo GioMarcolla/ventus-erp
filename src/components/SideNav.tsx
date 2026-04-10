@@ -62,7 +62,7 @@ const SideNav: FC = (): ReactElement => {
             <ConfirmModal
                 icon={
                     <div className="w-full text-center">
-                        <IconLock size={72} className="text-rosso m-auto" />
+                        <IconLock size={72} className="text-contrast m-auto" />
                     </div>
                 }
                 isOpen={isModalOpen}
@@ -74,15 +74,15 @@ const SideNav: FC = (): ReactElement => {
                 header="Encerrar sessão?"
                 body="Tem certeza que deseja encerrar sua sessão? Suas alterações não salvas podem ser perdidas."
                 confirmButton={
-                    <button className="bg-rosso flex w-full flex-row items-center justify-center gap-2 rounded-full px-6 py-2 italic hover:cursor-pointer hover:brightness-125">
-                        <IconLogout size={20} className="text-rosso-light" />
-                        <span className="text-rosso-light">Encerrar sessão</span>
+                    <button className="bg-contrast flex w-full flex-row items-center justify-center gap-2 rounded-full px-6 py-2 italic hover:cursor-pointer hover:brightness-125">
+                        <IconLogout size={20} className="text-contrast-light" />
+                        <span className="text-contrast-light">Encerrar sessão</span>
                     </button>
                 }
                 cancelButton={
-                    <button className="bg-verde flex w-full flex-row items-center justify-center gap-2 rounded-full px-6 py-2 italic hover:cursor-pointer hover:brightness-125">
-                        <IconX size={20} className="text-verde-light" />
-                        <span className="text-verde-light">Continuar sessão</span>
+                    <button className="bg-accent flex w-full flex-row items-center justify-center gap-2 rounded-full px-6 py-2 italic hover:cursor-pointer hover:brightness-125">
+                        <IconX size={20} className="text-accent-light" />
+                        <span className="text-accent-light">Continuar sessão</span>
                     </button>
                 }
             />
@@ -98,8 +98,8 @@ const SideNav: FC = (): ReactElement => {
                         href={item.href}
                         className={`flex flex-row items-center gap-2 rounded-full px-4 py-2 font-medium transition-all duration-200 ${
                             isActive(item.href)
-                                ? 'bg-verde text-white shadow-md'
-                                : 'hover:bg-verde-light hover:text-verde'
+                                ? 'bg-accent text-white shadow-md'
+                                : 'hover:bg-accent-light hover:text-accent'
                         }`}
                     >
                         {item.icon}
@@ -115,8 +115,8 @@ const SideNav: FC = (): ReactElement => {
                         href={item.href}
                         className={`flex flex-row items-center gap-2 rounded-full p-2 font-medium transition-all duration-200 ${
                             isActive(item.href)
-                                ? 'bg-verde text-white shadow-md'
-                                : 'hover:bg-verde-light hover:text-verde'
+                                ? 'bg-accent text-white shadow-md'
+                                : 'hover:bg-accent-light hover:text-accent'
                         }`}
                     >
                         {item.icon}
@@ -132,8 +132,8 @@ const SideNav: FC = (): ReactElement => {
                         href={item.href}
                         className={`flex flex-row items-center gap-2 rounded-full p-2 font-medium transition-all duration-200 ${
                             isActive(item.href)
-                                ? 'bg-verde text-white shadow-md'
-                                : 'hover:bg-verde-light hover:text-verde'
+                                ? 'bg-accent text-white shadow-md'
+                                : 'hover:bg-accent-light hover:text-accent'
                         }`}
                     >
                         {item.icon}
@@ -145,7 +145,7 @@ const SideNav: FC = (): ReactElement => {
             {/* User / Logout Area */}
             <div className="border-t border-gray-200 p-2">
                 <button
-                    className="text-rosso hover:bg-rosso-light hover:text-rosso flex w-full items-center gap-3 rounded-full px-4 py-2 text-sm font-medium hover:cursor-pointer"
+                    className="text-contrast hover:bg-contrast-light hover:text-contrast flex w-full items-center gap-3 rounded-full px-4 py-2 text-sm font-medium hover:cursor-pointer"
                     onClick={() => setIsModalOpen(true)}
                 >
                     <IconLogout size={20} />

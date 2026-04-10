@@ -16,7 +16,7 @@ const MembrosPage: FC = async (): Promise<ReactElement> => {
         throw new Error(error?.message || 'Falha ao carregar membros.');
     }
 
-    return <MemberTable className="h-full grow" initialData={members} />;
+    return <MemberTable className="h-full grow" members={members} />;
 };
 
 export default MembrosPage;

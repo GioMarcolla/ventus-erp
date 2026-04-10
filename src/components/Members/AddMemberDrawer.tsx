@@ -21,7 +21,7 @@ const AddMemberDrawer: FC = (): ReactElement => {
             trigger={onClick => (
                 <button
                     onClick={onClick}
-                    className="bg-verde flex items-center gap-2 rounded-full px-6 py-2 font-bold text-white shadow-lg hover:cursor-pointer active:scale-95"
+                    className="bg-accent flex items-center gap-2 rounded-full px-6 py-2 font-bold text-white shadow-lg hover:cursor-pointer active:scale-95"
                 >
                     <IconUserPlus size={18} /> NOVO MEMBRO
                 </button>

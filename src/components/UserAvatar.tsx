@@ -16,7 +16,7 @@ const UserAvatar: FC = (): ReactElement => {
             <div className="flex items-center gap-4">
                 <div
                     id="user-avatar"
-                    className="bg-verde flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-white"
+                    className="bg-accent flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-white"
                     onMouseEnter={() => setIsOpen(true)}
                 >
                     AD

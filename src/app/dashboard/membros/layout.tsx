@@ -20,7 +20,7 @@ const MembersLayout: FC<MembersLayoutProps> = ({ children }): ReactElement => {
             <div className="flex shrink items-end justify-between">
                 <div>
                     <h1 className="text-ink-dark text-4xl font-black tracking-tight uppercase italic">Membros</h1>
-                    <p className="font-medium">Círculo Ítalo-Brasileiro — Gestão de Base</p>
+                    <p className="font-medium">Gestão de Membros</p>
                 </div>
 
                 <AddMemberDrawer />

@@ -32,11 +32,11 @@ const HomePage: FC = (): ReactElement => {
             </aside>
 
             {/* Right Side: Login Form */}
-            <main className="bg-verde relative flex grow basis-1/2 flex-col items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+            <main className="bg-accent relative flex grow basis-1/2 flex-col items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
                 <div className="w-full max-w-md space-y-8 rounded-2xl border border-gray-200 bg-white p-10 shadow-lg shadow-gray-600">
                     <div className="flex flex-col items-center">
                         <Logo className="h-40 w-40" />
-                        <h2 className="text-verde text-3xl font-extrabold tracking-tight">Círculo Ítalo-Brasileiro</h2>
+                        <h2 className="text-accent text-3xl font-extrabold tracking-tight">Círculo Ítalo-Brasileiro</h2>
                         <p className="mt-2 text-sm font-medium text-gray-500">Sistema de Gestão de Clubes | ERP</p>
                     </div>
 
@@ -62,7 +62,7 @@ const HomePage: FC = (): ReactElement => {
                                     name="email"
                                     required
                                     autoComplete="email"
-                                    className="focus:border-verde focus:ring-verde mt-1 block w-full rounded-full border border-gray-300 px-5 py-3 shadow-sm transition-all focus:ring-1 focus:outline-none sm:text-sm"
+                                    className="focus:border-accent focus:ring-accent mt-1 block w-full rounded-full border border-gray-300 px-5 py-3 shadow-sm transition-all focus:ring-1 focus:outline-none sm:text-sm"
                                     placeholder="seu email ou usuario"
                                 />
                             </div>
@@ -79,7 +79,7 @@ const HomePage: FC = (): ReactElement => {
                                     type="password"
                                     required
                                     autoComplete="current-password"
-                                    className="focus:border-verde focus:ring-verde mt-1 block w-full rounded-full border border-gray-300 px-5 py-3 shadow-sm transition-all focus:ring-1 focus:outline-none sm:text-sm"
+                                    className="focus:border-accent focus:ring-accent mt-1 block w-full rounded-full border border-gray-300 px-5 py-3 shadow-sm transition-all focus:ring-1 focus:outline-none sm:text-sm"
                                     placeholder="•••••••••••"
                                 />
                             </div>
@@ -92,7 +92,7 @@ const HomePage: FC = (): ReactElement => {
                                 'group relative flex w-full justify-center rounded-full px-4 py-3 text-sm font-black tracking-widest text-white uppercase transition-all focus:ring-2 focus:ring-offset-2 focus:outline-none',
                                 isPending
                                     ? 'cursor-not-allowed bg-gray-400'
-                                    : 'bg-verde shadow-md hover:bg-[#007038] hover:shadow-lg active:scale-[0.98]',
+                                    : 'bg-accent shadow-md hover:bg-[#007038] hover:shadow-lg active:scale-[0.98]',
                             )}
                         >
                             {isPending ? (

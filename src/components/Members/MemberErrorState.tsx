@@ -29,11 +29,11 @@ const MemberErrorState: FC<MemberErrorStateProps> = ({ reset }): ReactElement =>
             <div className="flex w-full items-center justify-center p-4">
                 <button
                     onClick={() => handleRetry()}
-                    className="text-ink-light bg-rosso flex flex-row items-center justify-center gap-2 rounded-full px-6 py-2 italic hover:cursor-pointer hover:brightness-125"
+                    className="text-ink-light bg-contrast flex flex-row items-center justify-center gap-2 rounded-full px-6 py-2 italic hover:cursor-pointer hover:brightness-125"
                     disabled={isPending}
                 >
-                    <IconRefresh size={20} className="animate-reverse-spin text-rosso-light" />
-                    <span className="text-rosso-light font-medium">Tentar novamente</span>
+                    <IconRefresh size={20} className="animate-reverse-spin text-contrast-light" />
+                    <span className="text-contrast-light font-medium">Tentar novamente</span>
                 </button>
             </div>
         );
@@ -41,7 +41,7 @@ const MemberErrorState: FC<MemberErrorStateProps> = ({ reset }): ReactElement =>
     return (
         <ConfirmModal
             icon={
-                <div className="bg-rosso-light text-rosso m-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl">
+                <div className="bg-contrast-light text-contrast m-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl">
                     <IconAlertTriangle size={32} />
                 </div>
             }
@@ -54,7 +54,7 @@ const MemberErrorState: FC<MemberErrorStateProps> = ({ reset }): ReactElement =>
                 </>
             }
             confirmButton={
-                <button className="bg-verde text-verde-light flex w-full items-center justify-center gap-2 rounded-full py-2 font-bold shadow-lg transition-all hover:cursor-pointer hover:brightness-125 active:scale-95">
+                <button className="bg-accent text-accent-light flex w-full items-center justify-center gap-2 rounded-full py-2 font-bold shadow-lg transition-all hover:cursor-pointer hover:brightness-125 active:scale-95">
                     <IconRefresh size={20} />
                     Tentar Novamente
                 </button>
@@ -62,7 +62,7 @@ const MemberErrorState: FC<MemberErrorStateProps> = ({ reset }): ReactElement =>
             cancelButton={
                 <button
                     onClick={() => setIsOpen(false)}
-                    className="text-rosso-light bg-rosso flex w-full items-center justify-center gap-2 rounded-full py-2 font-bold shadow-lg transition-all hover:cursor-pointer hover:brightness-125 active:scale-95"
+                    className="text-contrast-light bg-contrast flex w-full items-center justify-center gap-2 rounded-full py-2 font-bold shadow-lg transition-all hover:cursor-pointer hover:brightness-125 active:scale-95"
                 >
                     <IconArrowBack size={20} />
                     Voltar

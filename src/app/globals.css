@@ -8,13 +8,13 @@
 
 @theme inline {
     /* --- Italian Branding Colors --- */
-    --color-verde: #008c45;
-    --color-verde-light: #e6f6ed;
-    --color-rosso: #cd212a;
-    --color-rosso-light: #fce4e4;
+    --color-accent: #008c45;
+    --color-accent-light: #e6f6ed;
+    --color-contrast: #cd212a;
+    --color-contrast-light: #fce4e4;
 
-    --color-primary: var(--color-verde);
-    --color-primary-light: var(--color-verde-light);
+    --color-primary: var(--color-accent);
+    --color-primary-light: var(--color-accent-light);
 
     --color-ink: hsl(240, 2%, 40%);
     --color-ink-light: hsl(240, 2%, 60%);
@@ -25,7 +25,7 @@
     --color-bg-dark: hsl(0, 0%, 94%);
     --color-bg-darker: hsl(0, 0%, 90%);
 
-    --color-selected: var(--color-rosso);
+    --color-selected: var(--color-contrast);
     /* --color-selected: red; */
 
     /* --- Typography --- */
@@ -40,6 +40,8 @@
 
     --shadow-base:
         3px 3px 10px color-mix(in srgb, black, transparent 92%), 3px 3px 30px color-mix(in srgb, black, transparent 96%);
+    --shadow-ribbon:
+        0 0 5px color-mix(in srgb, black, transparent 35%), 0 0 20px color-mix(in srgb, black, transparent 55%);
 }
 
 :root {
