@@ -6,17 +6,19 @@ import {
     IconFolderDollar,
     IconGlassFull,
     IconHome,
+    IconLock,
     IconLogout,
     IconTruck,
     IconTruckLoading,
     IconUserFilled,
     IconUsers,
+    IconX,
 } from '@tabler/icons-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FC, ReactElement, useEffect, useState } from 'react';
 import Logo from '@/components/Logo';
-import { logout } from '@/lib/actions/auth.actions';
+import { logout } from '@/lib/actions/Auth.actions';
 import ConfirmModal from '@/components/ui/ConfirmModal';
 
 // interface SideNavProps extends HTMLAttributes<HTMLDivElement> {}
@@ -56,16 +58,33 @@ const SideNav: FC = (): ReactElement => {
     const navItemsAdmin = [{ label: 'Logs', href: '/dashboard/logs', icon: <IconFileDatabase size={ICON_SIZE} /> }];
 
     return (
-        <aside className="flex flex-col border-r border-gray-200 bg-bg-medium">
+        <aside className="bg-bg-medium flex flex-col border-r border-gray-200">
             <ConfirmModal
+                icon={
+                    <div className="w-full text-center">
+                        <IconLock size={72} className="text-rosso m-auto" />
+                    </div>
+                }
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onConfirm={async () => {
                     await logout();
                     setIsModalOpen(false);
                 }}
-                title="Encerrar sessão?"
-                description="Tem certeza que deseja encerrar sua sessão? Suas alterações não salvas podem ser perdidas."
+                header="Encerrar sessão?"
+                body="Tem certeza que deseja encerrar sua sessão? Suas alterações não salvas podem ser perdidas."
+                confirmButton={
+                    <button className="bg-rosso flex w-full flex-row items-center justify-center gap-2 rounded-full px-6 py-2 italic hover:cursor-pointer hover:brightness-125">
+                        <IconLogout size={20} className="text-rosso-light" />
+                        <span className="text-rosso-light">Encerrar sessão</span>
+                    </button>
+                }
+                cancelButton={
+                    <button className="bg-verde flex w-full flex-row items-center justify-center gap-2 rounded-full px-6 py-2 italic hover:cursor-pointer hover:brightness-125">
+                        <IconX size={20} className="text-verde-light" />
+                        <span className="text-verde-light">Continuar sessão</span>
+                    </button>
+                }
             />
             <div className="flex flex-row items-center justify-center p-2">
                 <Logo />
@@ -126,8 +145,8 @@ const SideNav: FC = (): ReactElement => {
             {/* User / Logout Area */}
             <div className="border-t border-gray-200 p-2">
                 <button
-                    className="text-rosso flex w-full items-center gap-3 rounded-full text-sm font-medium hover:cursor-pointer px-4 py-2 hover:bg-rosso-light hover:text-rosso"
-                    onClick={setIsModalOpen.bind(null, true)}
+                    className="text-rosso hover:bg-rosso-light hover:text-rosso flex w-full items-center gap-3 rounded-full px-4 py-2 text-sm font-medium hover:cursor-pointer"
+                    onClick={() => setIsModalOpen(true)}
                 >
                     <IconLogout size={20} />
                     Sair

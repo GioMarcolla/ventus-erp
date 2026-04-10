@@ -8,7 +8,7 @@ import { FC, ReactElement } from 'react';
  */
 const Loading: FC = (): ReactElement => {
     return (
-        <div className="border-bg-dark bg-bg-medium flex h-full w-full animate-pulse items-center justify-center rounded-3xl border-2 shadow-sm">
+        <div className="border-bg-dark bg-bg-medium flex h-full w-full animate-pulse items-center justify-center rounded-3xl border-2">
             <p className="text-ink-light font-bold tracking-widest uppercase italic">Carregando Membros...</p>
         </div>
     );

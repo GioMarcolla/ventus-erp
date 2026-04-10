@@ -3,6 +3,7 @@
 import { FC, HTMLAttributes, ReactElement, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { IconAlertTriangle, IconArrowBack, IconRefresh } from '@tabler/icons-react';
+import ConfirmModal from '@/components/ui/ConfirmModal';
 
 interface MemberErrorStateProps extends HTMLAttributes<HTMLDivElement> {
     reset?: () => void;
@@ -11,6 +12,7 @@ interface MemberErrorStateProps extends HTMLAttributes<HTMLDivElement> {
 const MemberErrorState: FC<MemberErrorStateProps> = ({ reset }): ReactElement => {
     const router = useRouter();
     const [isOpen, setIsOpen] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(true);
     const [isPending, startTransition] = useTransition();
 
     const handleRetry = () => {
@@ -37,39 +39,39 @@ const MemberErrorState: FC<MemberErrorStateProps> = ({ reset }): ReactElement =>
         );
 
     return (
-        <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm duration-300">
-            <div className="animate-in zoom-in-95 bg-bg-light w-full max-w-md rounded-3xl p-8 text-start shadow-2xl duration-300">
+        <ConfirmModal
+            icon={
                 <div className="bg-rosso-light text-rosso m-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl">
                     <IconAlertTriangle size={32} />
                 </div>
-
-                <h2 className="text-ink-dark mb-4 text-2xl font-black tracking-tight uppercase italic">
-                    Conexão instável?
-                </h2>
-
-                <p className="text-ink font-medium">Não conseguimos puxar os dados do banco.</p>
-                <p className="text-ink font-medium">Pode ser o limite de conexões ou o café do servidor acabou.</p>
-                <p className="text-ink font-bold">Quer tentar de novo?</p>
-
-                <div className="mt-8 flex flex-col gap-4">
-                    <button
-                        onClick={handleRetry}
-                        className="bg-verde text-verde-light flex w-full items-center justify-center gap-2 rounded-full py-2 font-bold shadow-lg transition-all hover:cursor-pointer hover:brightness-125 active:scale-95"
-                    >
-                        <IconRefresh size={20} />
-                        Tentar Novamente
-                    </button>
-
-                    <button
-                        onClick={() => setIsOpen(false)}
-                        className="text-rosso-light bg-rosso flex w-full items-center justify-center gap-2 rounded-full py-2 font-bold shadow-lg transition-all hover:cursor-pointer hover:brightness-125 active:scale-95"
-                    >
-                        <IconArrowBack size={20} />
-                        Voltar
-                    </button>
-                </div>
-            </div>
-        </div>
+            }
+            header="Conexão instável?"
+            body={
+                <>
+                    <p className="text-ink font-medium">Não conseguimos puxar os dados do banco.</p>
+                    <p className="text-ink font-medium">Pode ser o limite de conexões ou o café do servidor acabou.</p>
+                    <p className="text-ink font-bold">Quer tentar de novo?</p>
+                </>
+            }
+            confirmButton={
+                <button className="bg-verde text-verde-light flex w-full items-center justify-center gap-2 rounded-full py-2 font-bold shadow-lg transition-all hover:cursor-pointer hover:brightness-125 active:scale-95">
+                    <IconRefresh size={20} />
+                    Tentar Novamente
+                </button>
+            }
+            cancelButton={
+                <button
+                    onClick={() => setIsOpen(false)}
+                    className="text-rosso-light bg-rosso flex w-full items-center justify-center gap-2 rounded-full py-2 font-bold shadow-lg transition-all hover:cursor-pointer hover:brightness-125 active:scale-95"
+                >
+                    <IconArrowBack size={20} />
+                    Voltar
+                </button>
+            }
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onConfirm={handleRetry}
+        />
     );
 };
 

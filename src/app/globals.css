@@ -21,9 +21,9 @@
     --color-ink-dark: hsl(240, 2%, 10%);
 
     --color-bg-light: hsl(0, 0%, 99%);
-    --color-bg-medium: hsl(0, 0%, 98%);
-    --color-bg-dark: hsl(0, 0%, 96%);
-    --color-bg-darker: hsl(0, 0%, 93%);
+    --color-bg-medium: hsl(0, 0%, 97%);
+    --color-bg-dark: hsl(0, 0%, 94%);
+    --color-bg-darker: hsl(0, 0%, 90%);
 
     --color-selected: var(--color-rosso);
     /* --color-selected: red; */
@@ -37,6 +37,9 @@
     --radius-lg: 1rem;
 
     --animate-reverse-spin: reverse-spin 2s linear infinite;
+
+    --shadow-base:
+        3px 3px 10px color-mix(in srgb, black, transparent 92%), 3px 3px 30px color-mix(in srgb, black, transparent 96%);
 }
 
 :root {
@@ -53,4 +56,3 @@ body {
     color: var(--foreground);
     font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
-

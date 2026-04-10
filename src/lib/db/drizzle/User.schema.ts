@@ -15,7 +15,9 @@ export const users = pgTable(
         email: varchar('email', { length: 255 }).notNull().unique(),
         username: varchar('username', { length: 255 }).notNull().unique(),
 
-        fullName: varchar('full_name', { length: 200 }).notNull(),
+        firstName: varchar('first_name', { length: 255 }).notNull(),
+        middleName: varchar('middle_name', { length: 255 }),
+        lastName: varchar('last_name', { length: 255 }).notNull(),
         phone: varchar('phone', { length: 20 }),
 
         // THE ONLY LINK THAT MATTERS:

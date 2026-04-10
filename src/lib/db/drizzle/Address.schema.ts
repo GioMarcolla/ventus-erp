@@ -5,7 +5,7 @@ export const addressColumns = {
     number: varchar('number', { length: 20 }).notNull(),
     // For the nonnos living in the city center or gated communities
     apartment: varchar('apartment', { length: 50 }),
-    bairro: varchar('bairro', { length: 100 }).notNull(),
+    distric: varchar('bairro', { length: 100 }).notNull(),
     city: varchar('city', { length: 100 }).notNull(),
     state: varchar('state', { length: 100 }).notNull(),
     country: varchar('country', { length: 100 }).default('Brasil').notNull(),

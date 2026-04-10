@@ -1,14 +1,20 @@
 import MemberTable from '@/components/Members/MembersTable';
-import { getAllMembers } from '@/lib/services/Members.services';
+import { GetAllMemberReturnType, getAllMembers } from '@/lib/services/Members.services';
 import { FC, ReactElement } from 'react';
 
 /**
- * MembrosPage is a page component that renders a table with all members of the Círculo Ítalo-Brasileiro.
- * It also renders a button to add a new member.
- * The table is wrapped in a Suspense component that renders a skeleton while the data is being fetched.
+ * A functional component that renders a Members table page.
+ * It fetches all members from the Members service and renders a MemberTable component.
+ * If there is an error while fetching the members, it throws an error with the message.
+ *
+ * @returns {Promise<ReactElement>} A React element representing the Members table page.
  */
 const MembrosPage: FC = async (): Promise<ReactElement> => {
-    const members = await getAllMembers();
+    const { data: members, success, error }: GetAllMemberReturnType = await getAllMembers();
+
+    if (!members || !success || error) {
+        throw new Error(error?.message || 'Falha ao carregar membros.');
+    }
 
     return <MemberTable className="h-full grow" initialData={members} />;
 };

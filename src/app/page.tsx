@@ -4,7 +4,7 @@ import { useActionState } from 'react';
 import Image from 'next/image';
 import { FC, ReactElement } from 'react';
 import Logo from '@/components/Logo';
-import { login } from '@/lib/actions/auth.actions';
+import { login } from '@/lib/actions/Auth.actions';
 import { ActionState } from '@/lib/types/auth.types'; // Your new strict type
 import { cn } from '@/lib/utils/tailwind.utils';
 

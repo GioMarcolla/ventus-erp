@@ -1,3 +1,4 @@
+import AddMemberDrawer from '@/components/Members/AddMemberDrawer';
 import { IconUserPlus } from '@tabler/icons-react';
 import { FC, HTMLAttributes, ReactElement } from 'react';
 
@@ -22,10 +23,7 @@ const MembersLayout: FC<MembersLayoutProps> = ({ children }): ReactElement => {
                     <p className="font-medium">Círculo Ítalo-Brasileiro — Gestão de Base</p>
                 </div>
 
-                <button className="bg-verde flex items-center gap-2 rounded-full px-6 py-2 font-bold text-white shadow-lg shadow-gray-300 transition-all hover:brightness-125 active:scale-95">
-                    <IconUserPlus size={18} />
-                    NOVO MEMBRO
-                </button>
+                <AddMemberDrawer />
             </div>
             {children}
         </section>
